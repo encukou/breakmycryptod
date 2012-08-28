@@ -10,17 +10,27 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <linux/random.h>
+#include <poll.h>
 
 int main() {
     int have;
     int add = 4096;
     int d = open("/dev/random", O_WRONLY);
 
-    ioctl(d, RNDGETENTCNT, &have);
-    printf("before: %d\n", have);
+    struct pollfd poll_data = {
+        .fd=d,
+        .events=POLLOUT,
+        .revents=0,
+    };
 
-    ioctl(d, RNDADDTOENTCNT, &add);
+    printf("breakmycrypto: Your system is now insecure.\n");
 
-    ioctl(d, RNDGETENTCNT, &have);
-    printf("after: %d\n", have);
+    while(poll(&poll_data, 1, -1) > 0) {
+        ioctl(d, RNDGETENTCNT, &have);
+        printf("breakmycrypto: Entropy estimate fell to %d, replenishing.\n", have);
+
+        ioctl(d, RNDADDTOENTCNT, &add);
+    }
+
+    printf("breakmycrypto: An error occurred, exiting.\n");
 }

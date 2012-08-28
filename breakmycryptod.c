@@ -23,14 +23,14 @@ int main() {
         .revents=0,
     };
 
-    printf("breakmycrypto: Your system is now insecure.\n");
+    printf("breakmycryptod: Your system is now INSECURE!!!\n");
 
     while(poll(&poll_data, 1, -1) > 0) {
         ioctl(d, RNDGETENTCNT, &have);
-        printf("breakmycrypto: Entropy estimate fell to %d, replenishing.\n", have);
+        printf("breakmycryptod: Entropy estimate fell to %d, replenishing.\n", have);
 
         ioctl(d, RNDADDTOENTCNT, &add);
     }
 
-    printf("breakmycrypto: An error occurred, exiting.\n");
+    printf("breakmycryptod: An error occurred, exiting.\n");
 }

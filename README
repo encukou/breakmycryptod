@@ -1,0 +1,18 @@
+Cryptography needs good randomness.
+
+However, when testing projects that rely on cryptography, more often than not,
+you don't need unbreakable keys: handwavy pseudo-random numbers are enough.
+And especially with automated tests on virtual machines, true random bits are
+scarce. Tests pause until /dev/random is filled up, developers get impatient
+and start scratching itches other than the code they're testing...
+
+breakmycryptod is such a scratch.
+
+This daemon simply waits for the kernel's entropy estimate to fall low enough,
+raises it, and starts waiting again. As a result, /dev/random never blocks,
+but it also doesn't return truly random numbers.
+
+Use this and your system, and all keys generated on it, will become insecure.
+
+
+Use make to build. Run breakmycryptod as root to break your crypto.

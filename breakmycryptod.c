@@ -22,8 +22,14 @@
 #include <sys/ioctl.h>
 #include <linux/random.h>
 #include <poll.h>
+#include <unistd.h>
 
 int main() {
+    if(geteuid()) {
+        printf("You are not root. Go away.\n");
+        return 1;
+    }
+
     int have;
     int add = 4096;
     int d = open("/dev/random", O_WRONLY);
@@ -44,4 +50,5 @@ int main() {
     }
 
     printf("breakmycryptod: An error occurred, exiting.\n");
+    return 1;
 }

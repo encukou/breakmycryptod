@@ -5,3 +5,7 @@ breakmycryptod: breakmycryptod.c
 
 clean:
 	rm breakmycryptod
+
+install: breakmycryptod
+	cp breakmycryptod /usr/sbin
+	cp breakmycryptod.service /usr/lib/systemd/system/

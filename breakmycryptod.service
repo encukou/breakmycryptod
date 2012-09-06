@@ -1,0 +1,11 @@
+# systemd service file for breakmycryptod
+
+[Unit]
+Description=Destroy any hope of crypto security by inflating the kernel entropy estimate whenever it drops too low
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/breakmycryptod
+
+[Install]
+WantedBy=basic.target

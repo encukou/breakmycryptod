@@ -1,0 +1,69 @@
+BREAKMYCRYPTOD(1)
+=================
+:doctype: manpage
+
+
+NAME
+----
+breakmycryptod - inflates the kernel entropy estimate
+
+
+SYNOPSIS
+--------
+*breakmycryptod*
+
+
+DESCRIPTION
+-----------
+This daemon raises the kernel's entropy estimate whenever it gets too low.
+As a result, /dev/random never blocks, but it also doesn't return truly
+random numbers.
+
+This compromises system security, as most cryptography software relies on
+a good source of randomness. Use it at your own risk.
+
+The intended usage is in virtual machines for testing entropy-hungry software.
+Key material generated while breakmycryptod is running must never be used
+for any serious purpose.
+
+Since it compromises the system, breakmycryptod must be run as root.
+
+
+OPTIONS
+-------
+none
+
+EXIT STATUS
+-----------
+Barring signals and errors, the daemon never exits once started.
+
+
+SYSTEMD SERVICE
+---------------
+
+The daemon comes with a systemd service file.
+The following commands will break your crypto permanently:
+
+-------------------------------------------------------------------------------
+sudo systemctl enable breakmycryptod.service
+sudo systemctl start breakmycryptod.service
+-------------------------------------------------------------------------------
+
+
+AUTHOR
+------
+Breakmycryptod was written by Petr Viktorin
+
+
+RESOURCES
+---------
+Project page: <https://github.com/encukou/breakmycryptod>
+
+
+COPYING
+-------
+Copyright \(C) 2012-2013 Petr Viktorin.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.

@@ -1,4 +1,4 @@
-BREAKMYCRYPTOD(1)
+BREAKMYCRYPTOD(8)
 =================
 :doctype: manpage
 

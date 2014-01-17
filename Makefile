@@ -1,10 +1,12 @@
-all: breakmycryptod
+all: breakmycryptod breakmycryptod.8.gz
 
 breakmycryptod: breakmycryptod.c
 	gcc breakmycryptod.c -o breakmycryptod
 
 clean:
-	rm breakmycryptod
+	rm breakmycryptod || :
+	rm breakmycryptod.8 || :
+	rm breakmycryptod.8.gz || :
 
 breakmycryptod.8: breakmycryptod.8.txt
 	a2x --doctype manpage --format manpage $<

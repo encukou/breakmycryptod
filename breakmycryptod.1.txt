@@ -5,7 +5,7 @@ BREAKMYCRYPTOD(1)
 
 NAME
 ----
-breakmycryptod - inflates the kernel entropy estimate
+breakmycryptod - inflates the kernel entropy estimate whenever it drops too low
 
 
 SYNOPSIS
@@ -15,16 +15,18 @@ SYNOPSIS
 
 DESCRIPTION
 -----------
-This daemon raises the kernel's entropy estimate whenever it gets too low.
-As a result, /dev/random never blocks, but it also doesn't return truly
-random numbers.
+Use this and your system, and all keys generated on it, will become insecure.
 
-This compromises system security, as most cryptography software relies on
-a good source of randomness. Use it at your own risk.
+This daemon waits for the kernel's entropy estimate to fall low enough, raises
+it, and starts waiting again. As a result, reading from the random device never
+blocks, but it also doesn't return truly random numbers.
 
-The intended usage is in virtual machines for testing entropy-hungry software.
+Since most cryptography software relies on a good source of randomness,
+this compromises system security. Use it at your own risk.
 Key material generated while breakmycryptod is running must never be used
 for any serious purpose.
+
+The intended usage is in virtual machines for testing entropy-hungry software.
 
 Since it compromises the system, breakmycryptod must be run as root.
 
@@ -55,9 +57,10 @@ AUTHOR
 Breakmycryptod was written by Petr Viktorin
 
 
-RESOURCES
----------
+LINKS
+-----
 Project page: <https://github.com/encukou/breakmycryptod>
+libeatmydata, inspiration for the name: <http://www.flamingspork.com/projects/libeatmydata/>
 
 
 COPYING

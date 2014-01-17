@@ -6,13 +6,13 @@ breakmycryptod: breakmycryptod.c
 clean:
 	rm breakmycryptod
 
-breakmycryptod.1: breakmycryptod.1.txt
+breakmycryptod.8: breakmycryptod.8.txt
 	a2x --doctype manpage --format manpage $<
 
-breakmycryptod.1.gz: breakmycryptod.1
+breakmycryptod.8.gz: breakmycryptod.8
 	gzip -c $< > $@
 
-install: breakmycryptod breakmycryptod.1.gz
+install: breakmycryptod breakmycryptod.8.gz
 	cp breakmycryptod /usr/sbin
 	cp breakmycryptod.service /usr/lib/systemd/system/
-	cp breakmycryptod.1.gz /usr/share/man/man1/
+	cp breakmycryptod.8.gz /usr/share/man/man8/

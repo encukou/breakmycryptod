@@ -1,3 +1,9 @@
+DESTDIR ?= /usr
+SBINDIR ?= $(DESTDIR)/sbin
+LIBDIR ?= $(DESTDIR)/lib
+UNITDIR ?= $(LIBDIR)/systemd/system
+MANDIR ?= $(DESTDIR)/share/man
+
 all: breakmycryptod breakmycryptod.8.gz
 
 breakmycryptod: breakmycryptod.c
@@ -15,6 +21,9 @@ breakmycryptod.8.gz: breakmycryptod.8
 	gzip -c $< > $@
 
 install: breakmycryptod breakmycryptod.8.gz
-	cp breakmycryptod /usr/sbin
-	cp breakmycryptod.service /usr/lib/systemd/system/
-	cp breakmycryptod.8.gz /usr/share/man/man8/
+	mkdir -p $(SBINDIR)
+	cp breakmycryptod $(SBINDIR)/
+	mkdir -p $(UNITDIR)
+	cp breakmycryptod.service $(UNITDIR)/
+	mkdir -p $(MANDIR)/man8/
+	cp breakmycryptod.8.gz $(MANDIR)/man8/

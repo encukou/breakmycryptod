@@ -16,9 +16,11 @@ but it also doesn't return truly random numbers.
 
 
 Use make to build. Run breakmycryptod as root to break your crypto.
+For Fedora, packages are available in COPR:
+    https://copr.fedoraproject.org/coprs/pviktori/breakmycryptod/
+
 
 If you wish to cripple your system permanently, install the systemd service:
 
-    sudo make install
     sudo systemctl enable breakmycryptod.service
     sudo systemctl start breakmycryptod.service

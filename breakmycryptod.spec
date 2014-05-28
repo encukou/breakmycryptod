@@ -49,5 +49,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644, root, root) %{_unitdir}/breakmycryptod.service
 
 %changelog
+* Wed May 28 2014 Petr Viktorin <encukou@gmail.com> 0.1.0-3
+- Packaging improvements
+
+* Tue May 28 2014 Petr Viktorin <encukou@gmail.com> 0.1.0-2
+- Packaging improvements
+
 * Tue Sep 06 2011 Petr Viktorin <encukou@gmail.com> 0.1.0-1
 - Initial version of the package
